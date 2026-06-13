@@ -1,16 +1,38 @@
-# React + Vite
+# Unofficial Discord API Updates
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **Unofficial Discord API Updates**, a complete hub dedicated to documenting silent API changes, undocumented features, and hidden cosmetics within the Discord ecosystem.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Latest Feed**: Stay up-to-date with discoveries (e.g., Nameplate Endpoints, Avatar Decoration errors) as soon as they are reverse-engineered.
+- **Deep-Dive Guides**: Comprehensive breakdowns of how specific endpoints work. For example, read exactly how the Discord Nameplates API payload is structured.
+- **Responsive Architecture**: Built on Vite + React Router for instant transitions, with a fully mobile-responsive sidebar and beautifully styled Table of Contents.
+- **Premium Aesthetics**: Engineered with a sleek dark mode, frosted glass elements, and modern typography to make reading API docs a breeze.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** (via **Vite**)
+- **React Router** for multi-page navigation
+- Custom CSS with CSS Variables for theme management
 
-## Expanding the ESLint configuration
+## 📦 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/devrock07/discordjs-api-uncovered.git
+   ```
+2. Navigate into the directory and install dependencies:
+   ```bash
+   cd discordjs-api-uncovered
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## 🤝 Contributing
+Found a new hidden endpoint or undocumented API change? Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+
+---
+Created by [devrock07](https://github.com/devrock07)

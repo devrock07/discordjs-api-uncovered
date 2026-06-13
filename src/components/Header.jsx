@@ -16,7 +16,7 @@ export default function Header({ toggleSidebar }) {
         <div className="nav-links">
             <Link to="/">Feed</Link>
             <Link to="/nameplates">Guides</Link>
-            <a href="https://github.com/devrock07" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://github.com/devrock07/discordjs-api-uncovered" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
     </header>
   );
