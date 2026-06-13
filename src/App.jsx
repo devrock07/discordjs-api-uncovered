@@ -8,6 +8,7 @@ import Nameplates from './pages/Nameplates';
 import UndocumentedApis from './pages/UndocumentedApis';
 import RateLimits from './pages/RateLimits';
 import PlaceholderPage from './pages/PlaceholderPage';
+import RichPresence from './pages/RichPresence';
 import './App.css';
 
 function AppContent() {
@@ -45,6 +46,7 @@ function AppContent() {
             <Route path="/profile-effects" element={<PlaceholderPage title="Profile Effects" description="Details on profile effect IDs and payload structures." />} />
             <Route path="/undocumented-apis" element={<UndocumentedApis />} />
             <Route path="/rate-limits" element={<RateLimits />} />
+            <Route path="/rich-presence" element={<RichPresence />} />
         </Routes>
         {showToc && <Toc />}
       </div>

@@ -162,6 +162,37 @@ export default function Nameplates() {
             </div>
         </div>
         
+        <h2 id="auto-apply-nameplates">Auto-Apply on Guild Join</h2>
+        <p>
+            You can automatically apply a nameplate to your bot the moment it joins a new server by listening to the <code>guildCreate</code> event:
+        </p>
+        <pre><code><span className="token keyword">module</span><span className="token punctuation">.</span><span className="token property">exports</span> <span className="token operator">=</span> <span className="token punctuation">{'{'}</span>
+  <span className="token property">name</span><span className="token punctuation">:</span> <span className="token string">"guildCreate"</span><span className="token punctuation">,</span>
+  <span className="token property">once</span><span className="token punctuation">:</span> <span className="token keyword">false</span><span className="token punctuation">,</span>
+  <span className="token keyword">async</span> <span className="token function">execute</span><span className="token punctuation">(</span>guild<span className="token punctuation">,</span> client<span className="token punctuation">)</span> <span className="token punctuation">{'{'}</span>
+    <span className="token keyword">try</span> <span className="token punctuation">{'{'}</span>
+      <span className="token keyword">const</span> response <span className="token operator">=</span> <span className="token keyword">await</span> <span className="token function">fetch</span><span className="token punctuation">(</span>
+        <span className="token template-string"><span className="token template-punctuation string">`</span><span className="token string">https://discord.com/api/v10/guilds/$</span><span className="token interpolation"><span className="token interpolation-punctuation punctuation">{'{'}</span>guild<span className="token punctuation">.</span>id<span className="token interpolation-punctuation punctuation">{'}'}</span></span><span className="token string">/members/@me</span><span className="token template-punctuation string">`</span></span><span className="token punctuation">,</span>
+        <span className="token punctuation">{'{'}</span>
+          <span className="token property">method</span><span className="token punctuation">:</span> <span className="token string">"PATCH"</span><span className="token punctuation">,</span>
+          <span className="token property">headers</span><span className="token punctuation">:</span> <span className="token punctuation">{'{'}</span>
+            <span className="token property">Authorization</span><span className="token punctuation">:</span> <span className="token template-string"><span className="token template-punctuation string">`</span><span className="token string">Bot $</span><span className="token interpolation"><span className="token interpolation-punctuation punctuation">{'{'}</span>client<span className="token punctuation">.</span>token<span className="token interpolation-punctuation punctuation">{'}'}</span></span><span className="token template-punctuation string">`</span></span><span className="token punctuation">,</span>
+            <span className="token string-property property">"Content-Type"</span><span className="token punctuation">:</span> <span className="token string">"application/json"</span><span className="token punctuation">,</span>
+            <span className="token string-property property">"User-Agent"</span><span className="token punctuation">:</span> <span className="token string">"DiscordBot (https://your-bot.com, 1.0.0)"</span><span className="token punctuation">,</span>
+          <span className="token punctuation">{'}'}</span><span className="token punctuation">,</span>
+          <span className="token property">body</span><span className="token punctuation">:</span> JSON<span className="token punctuation">.</span><span className="token function">stringify</span><span className="token punctuation">(</span><span className="token punctuation">{'{'}</span>
+            <span className="token property">display_name_font_id</span><span className="token punctuation">:</span> <span className="token number">7</span><span className="token punctuation">,</span>
+            <span className="token property">display_name_effect_id</span><span className="token punctuation">:</span> <span className="token number">4</span><span className="token punctuation">,</span>
+            <span className="token property">display_name_colors</span><span className="token punctuation">:</span> <span className="token punctuation">[</span><span className="token number">16711680</span><span className="token punctuation">]</span><span className="token punctuation">,</span>
+          <span className="token punctuation">{'}'}</span><span className="token punctuation">)</span><span className="token punctuation">,</span>
+        <span className="token punctuation">{'}'}</span>
+      <span className="token punctuation">)</span><span className="token punctuation">;</span>
+    <span className="token punctuation">{'}'}</span> <span className="token keyword">catch</span> <span className="token punctuation">(</span>error<span className="token punctuation">)</span> <span className="token punctuation">{'{'}</span>
+      console<span className="token punctuation">.</span><span className="token function">error</span><span className="token punctuation">(</span><span className="token string">"[x] Error in guildCreate event:"</span><span className="token punctuation">,</span> error<span className="token punctuation">)</span><span className="token punctuation">;</span>
+    <span className="token punctuation">{'}'}</span>
+  <span className="token punctuation">{'}'}</span><span className="token punctuation">,</span>
+<span className="token punctuation">{'}'}</span><span className="token punctuation">;</span></code></pre>
+
         <div className="footer">
             <div className="footer-top">
                 <div>Last updated: Just now</div>

@@ -24,6 +24,7 @@ export default function Sidebar({ isOpen, closeSidebar }) {
                 <ul className="sidebar-nav">
                     <li><NavLink to="/undocumented-apis" onClick={closeSidebar} className={({isActive}) => isActive ? "active" : ""}>Undocumented APIs</NavLink></li>
                     <li><NavLink to="/rate-limits" onClick={closeSidebar} className={({isActive}) => isActive ? "active" : ""}>Rate Limits</NavLink></li>
+                    <li><NavLink to="/rich-presence" onClick={closeSidebar} className={({isActive}) => isActive ? "active" : ""}>Rich Presence</NavLink></li>
                 </ul>
             </div>
         </aside>
