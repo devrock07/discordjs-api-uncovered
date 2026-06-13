@@ -79,14 +79,36 @@ export default function Nameplates() {
         <p>
             Avatar decorations are catalog items managed by Discord's Shop. The API runs a backend inventory check on the calling account; if the account does not "own" the item's digital entitlement (which is impossible for bot accounts to claim or buy), the API rejects the update with a <code>COLLECTIBLES_NOT_OWNED</code> error. Similarly, profile effects are strictly restricted to the user settings endpoint (<code>/users/@me/profile</code>), which outright blocks bot accounts from connecting.
         </p>
+
+        <h2 id="troubleshooting">Troubleshooting & Common Errors</h2>
+        <p>
+            When experimenting with these endpoints, you might run into a few common Discord API errors. Here is how to resolve them:
+        </p>
+        
+        <div className="grid-layout" style={{marginTop: '24px'}}>
+            <div className="grid-card" style={{borderLeft: '4px solid #ef4444', padding: '24px'}}>
+                <h3 style={{fontSize: '1.1rem', marginTop: 0}}>400 Bad Request</h3>
+                <p style={{fontSize: '0.9rem', marginBottom: 0}}>
+                    Usually occurs if you provide an invalid <code>display_name_font_id</code> or <code>display_name_effect_id</code>. Refer to the Supported Options list above to ensure your IDs are correct.
+                </p>
+            </div>
+            <div className="grid-card" style={{borderLeft: '4px solid #f59e0b', padding: '24px'}}>
+                <h3 style={{fontSize: '1.1rem', marginTop: 0}}>403 Forbidden</h3>
+                <p style={{fontSize: '0.9rem', marginBottom: 0}}>
+                    Your bot lacks the <code>MANAGE_NICKNAMES</code> permission or is trying to update a profile in a server where it doesn't have sufficient hierarchy.
+                </p>
+            </div>
+            <div className="grid-card" style={{borderLeft: '4px solid #8b5cf6', padding: '24px'}}>
+                <h3 style={{fontSize: '1.1rem', marginTop: 0}}>COLLECTIBLES_NOT_OWNED</h3>
+                <p style={{fontSize: '0.9rem', marginBottom: 0}}>
+                    This happens if you attempt to send Avatar Decoration or Profile Effect IDs. Bots cannot own these entitlements. Stick strictly to Nameplate fields.
+                </p>
+            </div>
+        </div>
         
         <div className="footer">
             <div className="footer-top">
                 <div>Last updated: Just now</div>
-                <div><a href="#" style={{display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)'}}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    Edit this page on GitHub
-                </a></div>
             </div>
             <div style={{marginTop: '24px', width: '100%', display: 'flex', justifyContent: 'center'}}>
                 <a href="https://github.com/devrock07" target="_blank" rel="noopener noreferrer" className="dev-badge">

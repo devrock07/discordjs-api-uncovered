@@ -19,6 +19,18 @@ function AppContent() {
     window.scrollTo(0, 0);
   }, [location]);
 
+  // Lock body scroll when sidebar is open on mobile
+  useEffect(() => {
+    if (sidebarOpen) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'unset';
+    }
+    return () => {
+        document.body.style.overflow = 'unset';
+    };
+  }, [sidebarOpen]);
+
   return (
     <>
       <Header toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />

@@ -15,13 +15,29 @@ export default function Toc() {
                 });
             }
         });
-    }, { rootMargin: '-20% 0px -80% 0px' });
+    }, { rootMargin: '-10% 0px -70% 0px' });
+
+    // Fallback for when scrolling to the absolute bottom of the page
+    const handleScroll = () => {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20) {
+            const links = document.querySelectorAll('.toc-nav a');
+            if (links.length > 0) {
+                links.forEach(l => l.classList.remove('active'));
+                links[links.length - 1].classList.add('active');
+            }
+        }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
 
     document.querySelectorAll('h1[id], h2[id]').forEach((section) => {
         observer.observe(section);
     });
 
-    return () => observer.disconnect();
+    return () => {
+        observer.disconnect();
+        window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const scrollToSection = (e, id) => {
@@ -51,6 +67,7 @@ export default function Toc() {
             <li><a href="#how-it-works" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works under the Hood</a></li>
             <li><a href="#supported-options" onClick={(e) => scrollToSection(e, 'supported-options')}>Supported Customization Options</a></li>
             <li><a href="#why-others-fail" onClick={(e) => scrollToSection(e, 'why-others-fail')}>Why Other Cosmetics Fail</a></li>
+            <li><a href="#troubleshooting" onClick={(e) => scrollToSection(e, 'troubleshooting')}>Troubleshooting & Errors</a></li>
         </ul>
     </aside>
   );

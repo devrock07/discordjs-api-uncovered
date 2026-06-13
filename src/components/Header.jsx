@@ -5,7 +5,7 @@ export default function Header({ toggleSidebar }) {
   return (
     <header className="header">
         <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
-            <button className="mobile-menu-btn" onClick={toggleSidebar}>
+            <button className="mobile-menu-btn" onClick={toggleSidebar} aria-label="Toggle navigation menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
             <Link to="/" className="logo">
