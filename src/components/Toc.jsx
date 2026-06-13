@@ -66,6 +66,9 @@ export default function Toc() {
             <li><a href="#overview" onClick={(e) => scrollToSection(e, 'overview')}>Overview & Mechanism</a></li>
             <li><a href="#how-it-works" onClick={(e) => scrollToSection(e, 'how-it-works')}>How It Works under the Hood</a></li>
             <li><a href="#supported-options" onClick={(e) => scrollToSection(e, 'supported-options')}>Supported Customization Options</a></li>
+            <li><a href="#color-conversion" onClick={(e) => scrollToSection(e, 'color-conversion')}>Color Conversion Helper</a></li>
+            <li><a href="#code-examples" onClick={(e) => scrollToSection(e, 'code-examples')}>discord.js Implementation</a></li>
+            <li><a href="#clearing-nameplates" onClick={(e) => scrollToSection(e, 'clearing-nameplates')}>Removing a Nameplate</a></li>
             <li><a href="#why-others-fail" onClick={(e) => scrollToSection(e, 'why-others-fail')}>Why Other Cosmetics Fail</a></li>
             <li><a href="#troubleshooting" onClick={(e) => scrollToSection(e, 'troubleshooting')}>Troubleshooting & Errors</a></li>
         </ul>

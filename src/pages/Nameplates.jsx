@@ -72,6 +72,62 @@ export default function Nameplates() {
             </div>
         </div>
 
+        <h2 id="color-conversion">Color Conversion Helper</h2>
+        <p>
+            Because Discord's API requires decimal integers for colors instead of hex strings, you will need to convert your standard hex colors before sending the payload. Here is a quick utility function to do that in JavaScript:
+        </p>
+        <pre><code><span className="token keyword">function</span> <span className="token function">hexToDecimal</span><span className="token punctuation">(</span>hex<span className="token punctuation">)</span> <span className="token punctuation">{'{'}</span>
+    <span className="token comment">// Remove the hash if it exists</span>
+    hex <span className="token operator">=</span> hex<span className="token punctuation">.</span><span className="token function">replace</span><span className="token punctuation">(</span><span className="token string">'#'</span><span className="token punctuation">,</span> <span className="token string">''</span><span className="token punctuation">)</span><span className="token punctuation">;</span>
+    <span className="token keyword">return</span> <span className="token function">parseInt</span><span className="token punctuation">(</span>hex<span className="token punctuation">,</span> <span className="token number">16</span><span className="token punctuation">)</span><span className="token punctuation">;</span>
+<span className="token punctuation">{'}'}</span>
+
+<span className="token comment">// Usage:</span>
+<span className="token keyword">const</span> decimalColor <span className="token operator">=</span> <span className="token function">hexToDecimal</span><span className="token punctuation">(</span><span className="token string">'#FF69B4'</span><span className="token punctuation">)</span><span className="token punctuation">;</span> <span className="token comment">// 16738740</span></code></pre>
+
+        <h2 id="code-examples">discord.js Implementation Example</h2>
+        <p>
+            Here is a fully working example of how to implement this as a slash command using <code>discord.js</code> v14. This example applies the "Sakura" font with a "Glow" effect, colored pink.
+        </p>
+        <pre><code><span className="token keyword">const</span> <span className="token punctuation">{'{'}</span> SlashCommandBuilder<span className="token punctuation">,</span> Routes <span className="token punctuation">{'}'}</span> <span className="token operator">=</span> <span className="token keyword">require</span><span className="token punctuation">(</span><span className="token string">'discord.js'</span><span className="token punctuation">)</span><span className="token punctuation">;</span>
+
+<span className="token keyword">module</span><span className="token punctuation">.</span><span className="token property">exports</span> <span className="token operator">=</span> <span className="token punctuation">{'{'}</span>
+    <span className="token property">data</span><span className="token punctuation">:</span> <span className="token keyword">new</span> <span className="token class-name">SlashCommandBuilder</span><span className="token punctuation">(</span><span className="token punctuation">)</span>
+        <span className="token punctuation">.</span><span className="token function">setName</span><span className="token punctuation">(</span><span className="token string">'namestyle'</span><span className="token punctuation">)</span>
+        <span className="token punctuation">.</span><span className="token function">setDescription</span><span className="token punctuation">(</span><span className="token string">'Updates the bot\\'s nameplate in this server.'</span><span className="token punctuation">)</span><span className="token punctuation">,</span>
+        
+    <span className="token keyword">async</span> <span className="token function">execute</span><span className="token punctuation">(</span>interaction<span className="token punctuation">)</span> <span className="token punctuation">{'{'}</span>
+        <span className="token keyword">await</span> interaction<span className="token punctuation">.</span><span className="token function">deferReply</span><span className="token punctuation">(</span><span className="token punctuation">{'{'}</span> <span className="token property">ephemeral</span><span className="token punctuation">:</span> <span className="token keyword">true</span> <span className="token punctuation">{'}'}</span><span className="token punctuation">)</span><span className="token punctuation">;</span>
+        
+        <span className="token keyword">try</span> <span className="token punctuation">{'{'}</span>
+            <span className="token keyword">await</span> interaction<span className="token punctuation">.</span>client<span className="token punctuation">.</span>rest<span className="token punctuation">.</span><span className="token function">patch</span><span className="token punctuation">(</span>
+                Routes<span className="token punctuation">.</span><span className="token function">guildMember</span><span className="token punctuation">(</span>interaction<span className="token punctuation">.</span>guildId<span className="token punctuation">,</span> <span className="token string">"@me"</span><span className="token punctuation">)</span><span className="token punctuation">,</span> 
+                <span className="token punctuation">{'{'}</span>
+                    <span className="token property">body</span><span className="token punctuation">:</span> <span className="token punctuation">{'{'}</span>
+                        <span className="token property">display_name_font_id</span><span className="token punctuation">:</span> <span className="token number">3</span><span className="token punctuation">,</span>       <span className="token comment">// Sakura font</span>
+                        <span className="token property">display_name_effect_id</span><span className="token punctuation">:</span> <span className="token number">6</span><span className="token punctuation">,</span>     <span className="token comment">// Glow effect</span>
+                        <span className="token property">display_name_colors</span><span className="token punctuation">:</span> <span className="token punctuation">[</span><span className="token number">16738740</span><span className="token punctuation">]</span>  <span className="token comment">// Decimal for #FF69B4</span>
+                    <span className="token punctuation">{'}'}</span>
+                <span className="token punctuation">{'}'}</span>
+            <span className="token punctuation">)</span><span className="token punctuation">;</span>
+            <span className="token keyword">await</span> interaction<span className="token punctuation">.</span><span className="token function">editReply</span><span className="token punctuation">(</span><span className="token string">'Nameplate updated successfully!'</span><span className="token punctuation">)</span><span className="token punctuation">;</span>
+        <span className="token punctuation">{'}'}</span> <span className="token keyword">catch</span> <span className="token punctuation">(</span>error<span className="token punctuation">)</span> <span className="token punctuation">{'{'}</span>
+            console<span className="token punctuation">.</span><span className="token function">error</span><span className="token punctuation">(</span>error<span className="token punctuation">)</span><span className="token punctuation">;</span>
+            <span className="token keyword">await</span> interaction<span className="token punctuation">.</span><span className="token function">editReply</span><span className="token punctuation">(</span><span className="token string">'Failed to update nameplate.'</span><span className="token punctuation">)</span><span className="token punctuation">;</span>
+        <span className="token punctuation">{'}'}</span>
+    <span className="token punctuation">{'}'}</span>
+<span className="token punctuation">{'}'}</span><span className="token punctuation">;</span></code></pre>
+
+        <h2 id="clearing-nameplates">Removing a Nameplate</h2>
+        <p>
+            If you want to reset the bot's display name to the default style, simply pass <code>0</code> to the fields in the same API request to clear them.
+        </p>
+        <pre><code><span className="token property">body</span><span className="token punctuation">:</span> <span className="token punctuation">{'{'}</span>
+    <span className="token property">display_name_font_id</span><span className="token punctuation">:</span> <span className="token number">0</span><span className="token punctuation">,</span>
+    <span className="token property">display_name_effect_id</span><span className="token punctuation">:</span> <span className="token number">0</span><span className="token punctuation">,</span>
+    <span className="token property">display_name_colors</span><span className="token punctuation">:</span> <span className="token punctuation">[</span><span className="token punctuation">]</span>
+<span className="token punctuation">{'}'}</span></code></pre>
+
         <h2 id="why-others-fail">Why Other Cosmetics Fail</h2>
         <p>
             While Nameplates are open to bot customization, <strong>Avatar Decorations</strong> (e.g. <code>avatar_decoration_sku_id</code>) and <strong>Profile Effects</strong> (e.g. <code>profile_effect_id</code>) fail when sent from a bot account.
