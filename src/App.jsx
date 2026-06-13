@@ -5,6 +5,8 @@ import Sidebar from './components/Sidebar';
 import Toc from './components/Toc';
 import Home from './pages/Home';
 import Nameplates from './pages/Nameplates';
+import UndocumentedApis from './pages/UndocumentedApis';
+import RateLimits from './pages/RateLimits';
 import PlaceholderPage from './pages/PlaceholderPage';
 import './App.css';
 
@@ -41,8 +43,8 @@ function AppContent() {
             <Route path="/nameplates" element={<Nameplates />} />
             <Route path="/avatar-decorations" element={<PlaceholderPage title="Avatar Decorations" description="Documentation for the avatar decoration endpoints and bypass attempts." />} />
             <Route path="/profile-effects" element={<PlaceholderPage title="Profile Effects" description="Details on profile effect IDs and payload structures." />} />
-            <Route path="/undocumented-apis" element={<PlaceholderPage title="Undocumented APIs" description="A collection of hidden endpoints discovered through reverse engineering." />} />
-            <Route path="/rate-limits" element={<PlaceholderPage title="Rate Limits" description="Information on undocumented rate limits and bucket behaviors." />} />
+            <Route path="/undocumented-apis" element={<UndocumentedApis />} />
+            <Route path="/rate-limits" element={<RateLimits />} />
         </Routes>
         {showToc && <Toc />}
       </div>
